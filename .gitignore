@@ -22,7 +22,7 @@ build/
 
 # Datos y reportes generados por el pipeline
 data/*.parquet
-data/execution_report.json
+data/execution_report*.json
 
 # Logs (si luego los creamos)
 logs/
