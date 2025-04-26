@@ -1,10 +1,18 @@
-import logging
+import os
 import pandas as pd
 import requests
-from io import BytesIO
+import logging
 from time import sleep
+from pathlib import Path
+from io import BytesIO
+
+# Configurar logging
+logging.basicConfig(level=logging.INFO, format='%(asctime)s [%(levelname)s] %(message)s')
 
 def extract_yellow_taxi_data(year: int, retries: int = 3) -> pd.DataFrame:
+    """
+    Extrae datos de taxis amarillos para el año indicado.
+    """
     base_url = "https://d37ci6vzurychx.cloudfront.net/trip-data/"
     monthly_data = []
     total_raw_rows = 0
@@ -26,7 +34,7 @@ def extract_yellow_taxi_data(year: int, retries: int = 3) -> pd.DataFrame:
 
                 logging.info(f"{file_name}: {row_count} registros extraídos")
                 monthly_data.append(df)
-                break
+                break  # éxito, salir del loop de reintentos
 
             except requests.exceptions.RequestException as e:
                 logging.warning(f"Error al descargar {file_name}: {e}")
@@ -44,6 +52,8 @@ def extract_yellow_taxi_data(year: int, retries: int = 3) -> pd.DataFrame:
         return pd.DataFrame()
 
     final_df = pd.concat(monthly_data, ignore_index=True)
+
+    logging.info("=== KPI de Extracción ===")
     logging.info(f"Total registros extraídos (sin filtrar): {total_raw_rows}")
 
     return final_df
