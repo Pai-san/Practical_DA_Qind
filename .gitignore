@@ -1,0 +1,34 @@
+# Python
+__pycache__/
+*.py[cod]
+*.so
+*.egg
+*.egg-info/
+dist/
+build/
+
+# Entornos virtuales
+.env/
+.venv/
+
+# Jupyter Notebooks (por si luego tienes alguno)
+.ipynb_checkpoints/
+
+# VSCode settings (si usas VSCode)
+.vscode/
+
+# PyCharm settings (si usas PyCharm)
+.idea/
+
+# Datos y reportes generados por el pipeline
+data/*.parquet
+data/execution_report.json
+
+# Logs (si luego los creamos)
+logs/
+
+# Archivos temporales
+*.tmp
+*.bak
+.DS_Store
+Thumbs.db
